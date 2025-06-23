@@ -16,10 +16,10 @@ const MovieCard: React.FC = () => {
           style={{ width: "100%", maxWidth: "500px" }}
         >
           <Card.Body>
+            <Card.Img variant="top" src="https://via.placeholder.com/150" />
             <Card.Title>{item.title}</Card.Title>
             <Card.Text>{item.text}</Card.Text>
           </Card.Body>
-          <Card.Img variant="top" src="https://via.placeholder.com/150" />
           <Card.Footer>
             <Button variant="primary">Go somewhere</Button>
           </Card.Footer>
