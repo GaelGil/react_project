@@ -1,31 +1,39 @@
-import { Card, Container, Button } from "react-bootstrap";
+import React from "react";
+// const items = [
+//   { title: "Card 1", text: "This is the first card." },
+//   { title: "Card 2", text: "This is the second card." },
+//   { title: "Card 3", text: "This is the third card." },
+// ];
+type Movie = {
+  url: string;
+  title: string;
+  release_date: string;
+};
 
-const items = [
-  { title: "Card 1", text: "This is the first card." },
-  { title: "Card 2", text: "This is the second card." },
-  { title: "Card 3", text: "This is the third card." },
-];
+type MovieCardProps = {
+  movie: Movie;
+};
 
-const MovieCard: React.FC = () => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+  function onFavoriteClick() {
+    alert("clicked");
+  }
+
   return (
-    <Container className="my-4 d-flex flex-column align-items-center">
-      {items.map((item, idx) => (
-        <Card
-          key={idx}
-          className="mb-3"
-          style={{ width: "100%", maxWidth: "500px" }}
-        >
-          <Card.Body>
-            <Card.Img variant="top" src="https://via.placeholder.com/150" />
-            <Card.Title>{item.title}</Card.Title>
-            <Card.Text>{item.text}</Card.Text>
-          </Card.Body>
-          <Card.Footer>
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Footer>
-        </Card>
-      ))}
-    </Container>
+    <div className="movie-card">
+      <div className="movie-poster">
+        <img src={movie.url} alt={movie.title} />
+        <div className="movie-overlay">
+          <button className="favorite-button" onClick={onFavoriteClick}>
+            🤍
+          </button>
+        </div>
+      </div>
+      <div className="movie-info">
+        <h3>{movie.title}</h3>
+        <p>{movie.release_date}</p>
+      </div>
+    </div>
   );
 };
 
