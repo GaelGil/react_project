@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/MovieCard.css";
 // const items = [
 //   { title: "Card 1", text: "This is the first card." },
 //   { title: "Card 2", text: "This is the second card." },
