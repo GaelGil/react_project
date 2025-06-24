@@ -51,7 +51,7 @@ const Home: React.FC = () => {
       <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
-          placeholder="search for movies"
+          placeholder="Search for movies..."
           className="search-input"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -60,18 +60,16 @@ const Home: React.FC = () => {
           Search
         </button>
       </form>
+
       {error && <div className="error-message">{error}</div>}
 
       {loading ? (
-        <div className="loading">Loading ... </div>
+        <div className="loading">Loading...</div>
       ) : (
         <div className="movies-grid">
-          {movies.map(
-            (movie) =>
-              movie.title.toLowerCase().startsWith(searchQuery) && (
-                <MovieCard movie={movie} key={movie.id} />
-              )
-          )}
+          {movies.map((movie) => (
+            <MovieCard movie={movie} key={movie.id} />
+          ))}
         </div>
       )}
     </div>
