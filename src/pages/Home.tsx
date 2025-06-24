@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { searchMovie, getPopularMovies } from "../services/api";
+import { searchMovies, getPopularMovies } from "../services/api";
 import MovieCard from "../components/MovieCard";
 import type { Movie } from "../types/movie";
 import "../css/Home.css";
@@ -25,9 +25,20 @@ const Home: React.FC = () => {
     loadPopularMovies();
   }, []);
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert(searchQuery);
+    if (!searchQuery.trim()) return;
+    if (loading) return;
+    setLoading(true);
+    try {
+      const searchResults = await searchMovies(searchQuery);
+      setMovies(searchResults);
+      setError("");
+    } catch {
+      setError("failed to load error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -44,14 +55,20 @@ const Home: React.FC = () => {
           Search
         </button>
       </form>
-      <div className="movie-grid">
-        {movies.map(
-          (movie) =>
-            movie.title.toLowerCase().startsWith(searchQuery) && (
-              <MovieCard movie={movie} key={movie.id} />
-            )
-        )}
-      </div>
+      {error && <div className="error-message">{error}</div>}
+
+      {loading ? (
+        <div className="loading">Loading ... </div>
+      ) : (
+        <div className="movie-grid">
+          {movies.map(
+            (movie) =>
+              movie.title.toLowerCase().startsWith(searchQuery) && (
+                <MovieCard movie={movie} key={movie.id} />
+              )
+          )}
+        </div>
+      )}
     </div>
   );
 };
