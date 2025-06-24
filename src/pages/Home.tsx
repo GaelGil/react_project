@@ -4,12 +4,16 @@ import MovieCard from "../components/MovieCard";
 import type { Movie } from "../types/movie";
 import "../css/Home.css";
 
+// home component
 const Home: React.FC = () => {
+  // state vars
   const [searchQuery, setSearchQuery] = useState("");
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // when anything changes on the componet it runs again, setting
+  // the array at the end makes it so that theres no change
   useEffect(() => {
     const loadPopularMovies = async () => {
       try {
@@ -25,19 +29,20 @@ const Home: React.FC = () => {
     loadPopularMovies();
   }, []);
 
+  // function to handle a search
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!searchQuery.trim()) return;
-    if (loading) return;
+    e.preventDefault(); // prevent default beavhior of reloading
+    if (!searchQuery.trim()) return; // if not empty space
+    if (loading) return; // if we are loading return
     setLoading(true);
     try {
-      const searchResults = await searchMovies(searchQuery);
-      setMovies(searchResults);
-      setError("");
+      const searchResults = await searchMovies(searchQuery); // get results
+      setMovies(searchResults); // update the movies state with results
+      setError(""); // update error state with empty string
     } catch {
-      setError("failed to load error");
+      setError("failed to load error"); // update the error state with error
     } finally {
-      setLoading(false);
+      setLoading(false); // update the loading state to false
     }
   };
 

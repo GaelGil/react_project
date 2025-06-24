@@ -1,3 +1,4 @@
+// movie type for declaring var types
 export type Movie = {
   id: string;
   url: string;
@@ -6,6 +7,7 @@ export type Movie = {
   poster_path: string;
 };
 
+// moviecardProps type for declaring var types
 export type MovieCardProps = {
   movie: Movie;
 };

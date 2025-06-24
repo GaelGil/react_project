@@ -7,9 +7,10 @@ import { Routes, Route } from "react-router-dom";
 function App() {
   return (
     <>
-      <NavBar />
+      <NavBar /> {/* import navbar compt */}
       <main className="main-content">
         <Routes>
+          {/* set the routes to the pages */}
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />
         </Routes>
