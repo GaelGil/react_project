@@ -32,7 +32,7 @@ const Home: React.FC = () => {
   // function to handle a search
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // prevent default beavhior of reloading
-    if (!searchQuery.trim()) return; // if not empty space
+    if (!searchQuery.trim()) return; // if not full empty space
     if (loading) return; // if we are loading return
     setLoading(true);
     try {
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
       {loading ? (
         <div className="loading">Loading ... </div>
       ) : (
-        <div className="movie-grid">
+        <div className="movies-grid">
           {movies.map(
             (movie) =>
               movie.title.toLowerCase().startsWith(searchQuery) && (
