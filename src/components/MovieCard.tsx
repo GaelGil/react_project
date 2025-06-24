@@ -1,19 +1,6 @@
 import React from "react";
 import "../css/MovieCard.css";
-// const items = [
-//   { title: "Card 1", text: "This is the first card." },
-//   { title: "Card 2", text: "This is the second card." },
-//   { title: "Card 3", text: "This is the third card." },
-// ];
-type Movie = {
-  url: string;
-  title: string;
-  release_date: string;
-};
-
-type MovieCardProps = {
-  movie: Movie;
-};
+import type { MovieCardProps } from "../types/movie";
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   function onFavoriteClick() {
@@ -23,7 +10,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   return (
     <div className="movie-card">
       <div className="movie-poster">
-        <img src={movie.url} alt={movie.title} />
+        <img
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+          alt={movie.title}
+        />
         <div className="movie-overlay">
           <button className="favorite-button" onClick={onFavoriteClick}>
             🤍

@@ -1,14 +1,29 @@
+import { useState, useEffect } from "react";
+import { searchMovie, getPopularMovies } from "../services/api";
 import MovieCard from "../components/MovieCard";
+import type { Movie } from "../types/movie";
 import "../css/Home.css";
-import { useState } from "react";
 
 const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const movies = [
-    { id: 1, title: "1234", release_date: "2022", url: "" },
-    { id: 2, title: "5678", release_date: "2022", url: "" },
-    { id: 3, title: "9101112", release_date: "2022", url: "" },
-  ];
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadPopularMovies = async () => {
+      try {
+        const popularMovies = await getPopularMovies();
+        setMovies(popularMovies);
+      } catch (err) {
+        console.log(err);
+        setError("failed to load movies");
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadPopularMovies();
+  }, []);
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
