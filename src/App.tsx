@@ -8,8 +8,10 @@ import NavBar from "./components/NavBar";
 function App() {
   return (
     <MovieProvider>
+      {/* import navbar component */}
       <NavBar />
       <main className="main-content">
+        {/* define routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/favorites" element={<Favorites />} />

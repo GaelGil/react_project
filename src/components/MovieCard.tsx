@@ -3,6 +3,9 @@ import "../css/MovieCard.css";
 import type { MovieCardProps } from "../types/movie";
 import { useMovieContext } from "../contexts/MovieContext";
 
+// moviecard component, takes in a movie as props, we load in the appropriate values
+// of that movie. If we click on a movie to set as favorite we will call our
+// onFavoriteClick function.
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
   const { isFavorite, addToFavorites, removeFromFavorites } = useMovieContext();
   const favorite = isFavorite(movie.id);
